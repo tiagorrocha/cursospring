@@ -3,6 +3,7 @@ package com.cursospring.resources;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +22,9 @@ public class CategoriaResource {
 	
 		
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public Optional<Categoria> find(@PathVariable Integer id) {
-		return service.buscar(id);
+	public ResponseEntity<?> find(@PathVariable Integer id) {
+		Categoria cat = service.buscar(id);
+		return ResponseEntity.ok().body(cat);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
