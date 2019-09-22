@@ -109,7 +109,7 @@ public class CursospringApplication implements CommandLineRunner {
 		ped1.setPagamento(pagto1);
 
 		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2019 20:55"),
-				null);
+				sdf.parse("21/10/2019 20:5"));
 		ped2.setPagamento(pagto2);
 
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
