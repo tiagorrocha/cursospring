@@ -10,23 +10,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class Categoria implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	
-	@JsonManagedReference
+
 	@ManyToMany(mappedBy = "categorias")
-	private List<Produto> produtos= new ArrayList<>();
-	
+	private List<Produto> produtos = new ArrayList<>();
+
 	public Categoria() {
-		
+
 	}
 
 	public Categoria(Integer id, String nome) {
@@ -83,5 +80,5 @@ public class Categoria implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }
