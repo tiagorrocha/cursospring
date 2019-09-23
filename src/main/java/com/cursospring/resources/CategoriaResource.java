@@ -1,5 +1,6 @@
 package com.cursospring.resources;
 
+import java.net.URI;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.cursospring.domain.Categoria;
 import com.cursospring.services.CategoriaService;
@@ -33,8 +35,12 @@ public class CategoriaResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public Categoria create(@RequestBody Categoria cat) {
-		return service.create(cat);
+	public ResponseEntity<Void> create(@RequestBody Categoria cat) {
+		cat = service.create(cat);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(cat.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+		
 	}
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
